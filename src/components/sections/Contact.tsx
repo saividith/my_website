@@ -55,9 +55,9 @@ export default function Contact() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 text-center"
         >
-          <div className="section-subtitle mb-4">// CONTACT</div>
+          <div className="section-subtitle mb-4">{'// CONTACT'}</div>
           <h2 className="section-title">
-            Let's <span className="gradient-text">Connect</span>
+            Let&apos;s <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-text-secondary mt-4 max-w-lg mx-auto">
             Open to internships, collaborations, and interesting engineering problems.
@@ -116,10 +116,10 @@ export default function Contact() {
               transition={{ duration: 0.4, delay: 0.3 }}
               className="glass-card p-5"
             >
-              <div className="text-xs font-mono text-accent-cyan mb-2">// QUICK_NOTE</div>
+              <div className="text-xs font-mono text-accent-cyan mb-2">{'// QUICK_NOTE'}</div>
               <p className="text-text-secondary text-sm leading-relaxed">
-                I respond quickly. Whether it's about a project, a collaboration, or a role —
-                I'm genuinely interested. Drop a message.
+                I respond quickly. Whether it&apos;s about a project, a collaboration, or a role —
+                I&apos;m genuinely interested. Drop a message.
               </p>
             </motion.div>
           </div>

@@ -110,12 +110,12 @@ export default function SystemDesign() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14 text-center"
         >
-          <div className="section-subtitle mb-4">// SYSTEM_DESIGN</div>
+          <div className="section-subtitle mb-4">{'// SYSTEM_DESIGN'}</div>
           <h2 className="section-title">
             How I <span className="gradient-text">Think</span>
           </h2>
           <p className="text-text-secondary mt-4 max-w-lg mx-auto">
-            Architecture decisions, caching strategies, and engineering tradeoffs from real systems I've built.
+            Architecture decisions, caching strategies, and engineering tradeoffs from real systems I&apos;ve built.
           </p>
         </motion.div>
 

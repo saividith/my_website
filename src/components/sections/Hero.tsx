@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import dynamic from "next/dynamic";
-import { PERSONAL_INFO } from "@/lib/constants";
+
 
 const ParticleNetwork = dynamic(() => import("@/components/three/ParticleNetwork"), {
   ssr: false,
@@ -95,7 +95,7 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
 
 export default function Hero() {
   const [bootDone, setBootDone] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [, setShowContent] = useState(false);
 
   const handleBootComplete = () => {
     setTimeout(() => {
@@ -153,7 +153,7 @@ export default function Hero() {
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="section-title"
               >
-                <span className="text-text-primary">Hi, I'm </span>
+                <span className="text-text-primary">Hi, I&apos;m </span>
                 <span className="gradient-text text-glow-blue">Sai Vidith</span>
               </motion.h1>
 
