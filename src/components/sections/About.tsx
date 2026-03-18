@@ -32,7 +32,7 @@ export default function About() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14 text-center"
         >
-          <div className="section-subtitle mb-4">// ABOUT_ME</div>
+          <div className="section-subtitle mb-4">{'// ABOUT_ME'}</div>
           <h2 className="section-title">
             System <span className="gradient-text">Dashboard</span>
           </h2>

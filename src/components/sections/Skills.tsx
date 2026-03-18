@@ -17,7 +17,7 @@ export default function Skills() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14 text-center"
         >
-          <div className="section-subtitle mb-4">// SKILLS</div>
+          <div className="section-subtitle mb-4">{'// SKILLS'}</div>
           <h2 className="section-title">
             Tech <span className="gradient-text">Arsenal</span>
           </h2>
@@ -71,7 +71,7 @@ export default function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="section-subtitle text-center mb-6">// CERTIFICATIONS</div>
+          <div className="section-subtitle text-center mb-6">{'// CERTIFICATIONS'}</div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {CERTIFICATIONS.map((cert, i) => (
               <motion.div
@@ -99,7 +99,7 @@ export default function Skills() {
           transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 glass-card p-6"
         >
-          <div className="section-subtitle mb-4">// GITHUB_ACTIVITY</div>
+          <div className="section-subtitle mb-4">{'// GITHUB_ACTIVITY'}</div>
           <div className="grid md:grid-cols-2 gap-4">
             <a
               href="https://github.com/saividithvjdq"

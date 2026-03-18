@@ -29,7 +29,7 @@ export default function Experience() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14 text-center"
         >
-          <div className="section-subtitle mb-4">// EXPERIENCE</div>
+          <div className="section-subtitle mb-4">{'// EXPERIENCE'}</div>
           <h2 className="section-title">
             Journey <span className="gradient-text">Log</span>
           </h2>

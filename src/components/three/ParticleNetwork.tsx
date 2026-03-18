@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
+
 import * as THREE from "three";
 
 function Particles({ count = 1500 }: { count?: number }) {

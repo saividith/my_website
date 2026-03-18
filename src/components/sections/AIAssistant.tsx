@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 type Message = {
   role: "user" | "assistant";
@@ -58,7 +58,7 @@ export default function AIAssistant() {
         ...prev,
         { role: "assistant", content: data.response },
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -93,7 +93,7 @@ export default function AIAssistant() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 text-center"
         >
-          <div className="section-subtitle mb-4">// AI_ASSISTANT</div>
+          <div className="section-subtitle mb-4">{'// AI_ASSISTANT'}</div>
           <h2 className="section-title">
             Ask <span className="gradient-text">SV-AI</span>
           </h2>

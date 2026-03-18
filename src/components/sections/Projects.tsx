@@ -39,7 +39,7 @@ function ProjectModal({
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <span className="section-subtitle text-[10px]">// PROJECT_MODULE</span>
+            <span className="section-subtitle text-[10px]">{'// PROJECT_MODULE'}</span>
             <h3 className="text-2xl font-bold text-text-primary mt-1">{project.title}</h3>
             <p className="text-text-secondary text-sm mt-1">{project.tagline}</p>
           </div>
@@ -170,7 +170,7 @@ export default function Projects() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 text-center"
         >
-          <div className="section-subtitle mb-4">// PROJECTS</div>
+          <div className="section-subtitle mb-4">{'// PROJECTS'}</div>
           <h2 className="section-title">
             System <span className="gradient-text">Modules</span>
           </h2>

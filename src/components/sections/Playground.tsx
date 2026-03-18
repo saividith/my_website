@@ -320,7 +320,7 @@ export default function Playground() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 text-center"
         >
-          <div className="section-subtitle mb-4">// PLAYGROUND</div>
+          <div className="section-subtitle mb-4">{'// PLAYGROUND'}</div>
           <h2 className="section-title">
             Interactive <span className="gradient-text">Lab</span>
           </h2>
