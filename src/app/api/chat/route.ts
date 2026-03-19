@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 
 const SYSTEM_PROMPT = `You are SV-AI, the personal AI assistant for Sai Vidith (Gouribhatla Sai Vidith), a backend and AI engineer based in Hyderabad, India. You are embedded in his portfolio website.
 
 About Sai Vidith:
 - Student at Vignana Jyothi Institute of Technology, pursuing B.Tech in Computer Science
 - Specializes in Backend Engineering and AI/ML systems
-- GitHub: @saividithvjdq and @saividith
-- Email: saividithvjdq@gmail.com
+- GitHub: @sai-vidith and @saividith
+- Email: saividith396@gmail.com
 - Available for internships and opportunities
 
 Key Projects:
@@ -71,7 +71,7 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 export async function POST(req: NextRequest) {
   try {
     const ip = req.headers.get("x-forwarded-for") || "unknown";
-    
+
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: "Rate limit exceeded. Please wait a minute." },
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ response: cached.response });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
     
     if (!apiKey) {
       // Fallback keyword-based response when no API key
@@ -102,29 +102,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ response });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    const chat = model.startChat({
-      history: [
-        {
-          role: "user",
-          parts: [{ text: "You are SV-AI. Please introduce yourself briefly." }],
-        },
-        {
-          role: "model",
-          parts: [{ text: "I'm SV-AI, Sai Vidith's personal AI assistant. I can tell you about his projects, skills, experience, and system design philosophy. What would you like to know?" }],
-        },
+    const groq = new Groq({ apiKey });
+    
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: "You are SV-AI. Please introduce yourself briefly." },
+        { role: "assistant", content: "I'm SV-AI, Sai Vidith's personal AI assistant. I can tell you about his projects, skills, experience, and system design philosophy. What would you like to know?" },
         ...messages.slice(0, -1).map((m: { role: string; content: string }) => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: m.content }],
+          role: (m.role === "assistant" ? "assistant" : "user") as "assistant" | "user",
+          content: m.content,
         })),
+        { role: "user", content: userMessage }
       ],
-      systemInstruction: SYSTEM_PROMPT,
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_completion_tokens: 1024,
     });
 
-    const result = await chat.sendMessage(userMessage);
-    const response = result.response.text();
+    const response = completion.choices[0]?.message?.content || "No response generated.";
 
     // Cache the response
     responseCache.set(cacheKey, { response, timestamp: Date.now() });
@@ -149,7 +145,7 @@ function getFallbackResponse(message: string): string {
     return "Sai Vidith's core stack: Python & FastAPI for backends, LangChain + RAG for AI systems, YOLOv8 for computer vision, PostgreSQL + Redis + Pinecone for data layer, Docker + AWS for infrastructure, and React/Next.js when frontend is needed. The AI/ML side is where he's especially strong.";
   }
   if (lower.includes("contact") || lower.includes("hire") || lower.includes("email") || lower.includes("work")) {
-    return "Sai Vidith is actively looking for opportunities! You can reach him at saividithvjdq@gmail.com, or via GitHub (@saividithvjdq / @saividith). He's particularly interested in backend engineering and AI systems roles.";
+    return "Sai Vidith is actively looking for opportunities! You can reach him at saividith396@gmail.com, or via GitHub (@sai-vidith / @saividith). He's particularly interested in backend engineering and AI systems roles.";
   }
   if (lower.includes("experience") || lower.includes("background")) {
     return "Sai Vidith is pursuing B.Tech in CS at Vignana Jyothi Institute of Technology. He leads the System Design Club on campus, holds IBM AI Fundamentals, AWS Cloud Practitioner, and GenAI certifications. His practical experience comes from building real-world AI and backend systems.";

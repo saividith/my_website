@@ -182,7 +182,7 @@ export default function HologramProfile() {
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                  backgroundImage: `url(https://avatars.githubusercontent.com/saividithvjdq)`,
+                  backgroundImage: `url(https://avatars.githubusercontent.com/sai-vidith)`,
                   filter: `contrast(${1.2 + glitchIntensity * 0.5}) saturate(${1.5 + glitchIntensity})`,
                   transform: `translateX(${(glitchIntensity - 0.5) * 10}px)`,
                 }}
@@ -191,7 +191,7 @@ export default function HologramProfile() {
               <div
                 className="absolute inset-0 bg-cover bg-center mix-blend-screen opacity-60"
                 style={{
-                  backgroundImage: `url(https://avatars.githubusercontent.com/saividithvjdq)`,
+                  backgroundImage: `url(https://avatars.githubusercontent.com/sai-vidith)`,
                   filter: 'hue-rotate(90deg)',
                   transform: `translateX(${glitchIntensity * 6}px) translateY(${(glitchIntensity - 0.5) * 4}px)`,
                 }}
@@ -221,7 +221,7 @@ export default function HologramProfile() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://avatars.githubusercontent.com/saividithvjdq"
+                src="https://avatars.githubusercontent.com/sai-vidith"
                 alt={PERSONAL_INFO.name}
                 className="w-full h-full object-cover"
               />

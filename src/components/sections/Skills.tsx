@@ -102,14 +102,14 @@ export default function Skills() {
           <div className="section-subtitle mb-4">{'// GITHUB_ACTIVITY'}</div>
           <div className="grid md:grid-cols-2 gap-4">
             <a
-              href="https://github.com/saividithvjdq"
+              href="https://github.com/sai-vidith"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-3 rounded-xl bg-bg-primary border border-border-subtle hover:border-accent-blue/40 transition-all"
             >
               <span className="text-2xl">⊹</span>
               <div>
-                <div className="font-semibold text-text-primary text-sm">@saividithvjdq</div>
+                <div className="font-semibold text-text-primary text-sm">@sai-vidith</div>
                 <div className="text-text-muted text-xs">13 repositories · Backend & AI projects</div>
               </div>
             </a>

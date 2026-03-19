@@ -15,10 +15,10 @@ export const PERSONAL_INFO = {
   bio: "I build systems that scale — from distributed backends to intelligent AI pipelines. Obsessed with clean architecture, real-world AI applications, and engineering that makes a difference.",
   location: "Hyderabad, India",
   institution: "Vignana Jyothi Institute of Technology",
-  email: "saividithvjdq@gmail.com",
+  email: "saividith396@gmail.com",
   domain: "saividith.tech",
   github: {
-    primary: "https://github.com/saividithvjdq",
+    primary: "https://github.com/sai-vidith",
     secondary: "https://github.com/saividith",
   },
   linkedin: "https://linkedin.com/in/saividith",
@@ -34,7 +34,7 @@ export const PROJECTS = [
       "A production-grade knowledge management system that processes, embeds, and semantically retrieves information using RAG architecture. Features multi-modal document ingestion, vector storage, and an intelligent chat interface.",
     stack: ["Python", "FastAPI", "LangChain", "PostgreSQL", "Pinecone", "React", "Docker"],
     category: "AI/ML",
-    github: "https://github.com/saividithvjdq/Smart_Brain",
+    github: "https://github.com/sai-vidith/Smart_Brain",
     highlights: ["RAG architecture", "Vector embeddings", "Multi-modal ingestion", "Semantic search"],
     architecture: {
       components: ["Client", "FastAPI Gateway", "LangChain Orchestrator", "Vector DB (Pinecone)", "PostgreSQL", "Redis Cache"],
@@ -77,7 +77,7 @@ export const PROJECTS = [
       "End-to-end expense intelligence pipeline. Receipts are OCR-processed, ML-classified by category, and aggregated into actionable financial insights with anomaly detection.",
     stack: ["Python", "FastAPI", "OCR", "TensorFlow", "PostgreSQL", "React"],
     category: "AI/ML",
-    github: "https://github.com/saividithvjdq/ProjectRaseed",
+    github: "https://github.com/sai-vidith/ProjectRaseed",
     highlights: ["OCR pipeline", "ML classification", "Anomaly detection", "Financial insights"],
     architecture: {
       components: ["Upload Service", "OCR Engine", "ML Classifier", "Analytics Engine", "PostgreSQL", "Dashboard"],
@@ -98,7 +98,7 @@ export const PROJECTS = [
       "A blockchain-based healthcare data management system ensuring patient data sovereignty, immutable audit trails, and selective access control for healthcare providers.",
     stack: ["Solidity", "Web3.js", "React", "Node.js", "IPFS", "Ethereum"],
     category: "Blockchain",
-    github: "https://github.com/saividithvjdq/HealthCare-BlockChain",
+    github: "https://github.com/sai-vidith/HealthCare-BlockChain",
     highlights: ["Smart contracts", "IPFS storage", "Access control", "Immutable audit logs"],
     architecture: {
       components: ["React DApp", "Ethereum Smart Contracts", "IPFS Node", "Web3 Provider", "Event Indexer"],
@@ -119,7 +119,7 @@ export const PROJECTS = [
       "A navigation intelligence system with real-time path optimization, smart indexing of geographic data, and AI-powered route recommendations based on contextual factors.",
     stack: ["Node.js", "Express", "PostgreSQL", "Redis", "Python", "Docker"],
     category: "Backend",
-    github: "https://github.com/saividithvjdq/Navaidix",
+    github: "https://github.com/sai-vidith/Navaidix",
     highlights: ["Path optimization", "Real-time data", "Smart indexing", "Geospatial queries"],
     architecture: {
       components: ["API Gateway", "Route Engine", "Cache (Redis)", "Geo DB (PostGIS)", "AI Recommender", "WebSocket"],
@@ -140,7 +140,7 @@ export const PROJECTS = [
       "Computer vision system for real-time emergency vehicle detection in traffic surveillance footage. Achieves 94.2% mAP50 using a custom-tuned YOLOv8 model with optimized inference pipeline.",
     stack: ["Python", "YOLOv8", "OpenCV", "FastAPI", "WebSocket", "TensorRT"],
     category: "AI/ML",
-    github: "https://github.com/saividithvjdq/Ambulance-Detection-using-YOLOv8",
+    github: "https://github.com/sai-vidith/Ambulance-Detection-using-YOLOv8",
     highlights: ["94.2% mAP50", "Real-time inference", "TensorRT optimization", "Live WebSocket feed"],
     architecture: {
       components: ["Camera Feed", "Preprocessing Pipeline", "YOLOv8 Model", "TensorRT Runtime", "Alert System", "Dashboard"],
@@ -173,6 +173,44 @@ export const PROJECTS = [
       tradeoffs: "Personalization quality vs. cold-start problem. Used collaborative filtering with fallback to popularity-based.",
     },
     featured: false,
+  },
+  {
+    id: "ai-business-tool-kit",
+    title: "AI Business Tool Kit",
+    tagline: "Comprehensive toolkit for AI business solutions",
+    description: "A business-focused tool kit that leverages AI capabilities to streamline operations and enhance productivity.",
+    stack: ["JavaScript", "Node.js", "AI Integration"],
+    category: "AI/ML",
+    github: "https://github.com/sai-vidith/AI-tool-kit",
+    highlights: ["Business automation", "AI integration", "Productivity enhancement"],
+    architecture: {
+      components: ["Frontend", "AI Core Service", "Integration Layer"],
+      flow: "User Request → AI Core Service → Processing → Actionable Business Insights",
+      decisions: [
+        { choice: "Modular architecture", reason: "Easy integration of various AI tools" }
+      ],
+      tradeoffs: "Generality vs Specificity: focused on common business use cases to maximize utility."
+    },
+    featured: true,
+  },
+  {
+    id: "bias-detection",
+    title: "Bias Detection AI",
+    tagline: "Mitigating unconscious bias in hiring & evaluations",
+    description: "An AI-powered tool that detects and mitigates unconscious bias by analyzing decision-making patterns, evaluating historical data, and providing real-time insights for equitable outcomes.",
+    stack: ["Python", "Machine Learning", "Data Analytics"],
+    category: "AI/ML",
+    github: "https://github.com/sai-vidith/Bias_Detection",
+    highlights: ["Pattern discovery", "Bias mitigation", "Real-time insights"],
+    architecture: {
+      components: ["Data Processing Pipeline", "Bias Detection Model", "Analytics Dashboard"],
+      flow: "Historical Data → Model Evaluation → Pattern Recognition → Insight Generation",
+      decisions: [
+        { choice: "White-box model evaluation", reason: "Interpretability is critical for fairness assessment" }
+      ],
+      tradeoffs: "Model complexity vs Interpretability."
+    },
+    featured: true,
   },
 ];
 

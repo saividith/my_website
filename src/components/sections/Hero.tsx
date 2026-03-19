@@ -70,17 +70,16 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.15 }}
-            className={`leading-7 ${
-              line.startsWith("[OK]")
+            className={`leading-7 ${line.startsWith("[OK]")
                 ? "text-accent-green"
                 : line.startsWith("[BOOT]")
-                ? "text-accent-cyan"
-                : line.startsWith("[INFO]")
-                ? "text-accent-blue"
-                : line.startsWith("Welcome")
-                ? "text-white font-semibold"
-                : "text-text-secondary"
-            }`}
+                  ? "text-accent-cyan"
+                  : line.startsWith("[INFO]")
+                    ? "text-accent-blue"
+                    : line.startsWith("Welcome")
+                      ? "text-white font-semibold"
+                      : "text-text-secondary"
+              }`}
           >
             {line}
           </motion.div>
@@ -200,7 +199,7 @@ export default function Hero() {
                   Ask my AI →
                 </a>
                 <a
-                  href="https://github.com/saividithvjdq"
+                  href="https://github.com/sai-vidith"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-neon"

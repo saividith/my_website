@@ -7,14 +7,24 @@ import { initializeCommands } from '@/lib/commands';
 import HeroSection from '@/components/entry/HeroSection';
 import ProjectsSection from '@/components/entry/ProjectsSection';
 import SystemDesignSection from '@/components/entry/SystemDesignSection';
+import About from '@/components/sections/About';
+import Skills from '@/components/sections/Skills';
+import Experience from '@/components/sections/Experience';
+import Contact from '@/components/sections/Contact';
+import Navigation from '@/components/layout/Navigation';
+
+import SplashProfile from '@/components/entry/SplashProfile';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // Lazy-load heavy components
 const AISection = dynamic(() => import('@/components/entry/AISection'), { ssr: false });
+const Playground = dynamic(() => import('@/components/sections/Playground'), { ssr: false });
 const TerminalOverlay = dynamic(() => import('@/components/entry/TerminalOverlay'), { ssr: false });
 
 export default function Home() {
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [terminalView, setTerminalView] = useState<ViewState>('terminal');
+  const [showSplash, setShowSplash] = useState(true);
   const initialized = useRef(false);
 
   // Initialize command registry once
@@ -63,12 +73,64 @@ export default function Home() {
       <div className="grid-bg" />
       <div className="noise fixed inset-0 pointer-events-none" />
 
-      {/* Main content — scrollable sections */}
-      <div className="relative z-10">
-        <HeroSection onOpenTerminal={openTerminal} />
+      {/* Splash Screen Profile */}
+      <AnimatePresence>
+        {showSplash && (
+          <SplashProfile onEnter={() => setShowSplash(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* Navigation - placed outside motion.div to prevent fixed positioning issues */}
+      {!showSplash && <Navigation />}
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showSplash ? 0 : 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="relative z-10"
+      >
+        {/* Hero */}
+        <div id="hero">
+          <HeroSection onOpenTerminal={openTerminal} />
+        </div>
+
+        {/* About — System Dashboard */}
+        <div id="about">
+          <About />
+        </div>
+
+        {/* Projects */}
         <ProjectsSection />
-        <SystemDesignSection />
-        <AISection />
+
+        {/* System Design */}
+        <div id="system-design">
+          <SystemDesignSection />
+        </div>
+
+        {/* AI Assistant */}
+        <div id="ai-assistant">
+          <AISection />
+        </div>
+
+        {/* Skills & Certifications */}
+        <div id="skills">
+          <Skills />
+        </div>
+
+        {/* Experience Timeline */}
+        <div id="experience">
+          <Experience />
+        </div>
+
+        {/* Interactive Playground */}
+        <div id="playground">
+          <Playground />
+        </div>
+
+        {/* Contact */}
+        <div id="contact">
+          <Contact />
+        </div>
 
         {/* Footer */}
         <footer className="relative py-16 px-6 border-t border-white/[0.03]">
@@ -87,7 +149,7 @@ export default function Home() {
             </button>
           </div>
         </footer>
-      </div>
+      </motion.div>
 
       {/* Terminal overlay */}
       <TerminalOverlay

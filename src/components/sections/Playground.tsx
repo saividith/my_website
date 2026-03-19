@@ -115,11 +115,10 @@ function SortingVisualizer() {
             key={a}
             onClick={() => { if (!running) setAlgo(a); }}
             disabled={running}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-              algo === a
-                ? "bg-accent-blue text-white"
-                : "bg-bg-primary border border-border-default text-text-secondary hover:text-text-primary"
-            }`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${algo === a
+              ? "bg-accent-blue text-white"
+              : "bg-bg-primary border border-border-default text-text-secondary hover:text-text-primary"
+              }`}
           >
             {a}_sort
           </button>
@@ -145,11 +144,10 @@ function SortingVisualizer() {
         </button>
         <button
           onClick={start}
-          className={`px-4 py-1.5 rounded-lg text-xs font-mono transition-all ${
-            running
-              ? "bg-red-500/20 border border-red-500/40 text-red-400"
-              : "bg-accent-green/20 border border-accent-green/40 text-accent-green"
-          }`}
+          className={`px-4 py-1.5 rounded-lg text-xs font-mono transition-all ${running
+            ? "bg-red-500/20 border border-red-500/40 text-red-400"
+            : "bg-accent-green/20 border border-accent-green/40 text-accent-green"
+            }`}
         >
           {running ? "◼ stop" : "▶ run"}
         </button>
@@ -210,7 +208,7 @@ const COMMANDS: Record<string, CommandOutput> = {
   },
   contact: {
     output:
-      "Email:    saividithvjdq@gmail.com\nGitHub:   github.com/saividithvjdq\nGitHub:   github.com/saividith\nLinkedIn: linkedin.com/in/saividith",
+      "Email:    saividith396@gmail.com\nGitHub:   github.com/sai-vidith\nGitHub:   github.com/saividith\nLinkedIn: linkedin.com/in/saividith",
     type: "success",
   },
 };
@@ -272,15 +270,14 @@ function TerminalPlayground() {
               </div>
             )}
             <pre
-              className={`whitespace-pre-wrap leading-5 ${
-                item.type === "success"
-                  ? "text-accent-green"
-                  : item.type === "error"
+              className={`whitespace-pre-wrap leading-5 ${item.type === "success"
+                ? "text-accent-green"
+                : item.type === "error"
                   ? "text-red-400"
                   : item.type === "data"
-                  ? "text-accent-cyan"
-                  : "text-text-secondary"
-              }`}
+                    ? "text-accent-cyan"
+                    : "text-text-secondary"
+                }`}
             >
               {item.output}
             </pre>
@@ -345,11 +342,10 @@ export default function Playground() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-3 py-1 text-xs font-mono rounded transition-all ${
-                    activeTab === tab
-                      ? "bg-accent-blue/30 text-accent-blue border border-accent-blue/30"
-                      : "text-text-muted hover:text-text-secondary"
-                  }`}
+                  className={`px-3 py-1 text-xs font-mono rounded transition-all ${activeTab === tab
+                    ? "bg-accent-blue/30 text-accent-blue border border-accent-blue/30"
+                    : "text-text-muted hover:text-text-secondary"
+                    }`}
                 >
                   {tab === "sort" ? "algo_visualizer" : "sv_terminal"}
                 </button>

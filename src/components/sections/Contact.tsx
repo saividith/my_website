@@ -7,9 +7,9 @@ import { PERSONAL_INFO } from "@/lib/constants";
 const LINKS = [
   {
     label: "GitHub (primary)",
-    href: "https://github.com/saividithvjdq",
+    href: "https://github.com/sai-vidith",
     icon: "⊹",
-    desc: "@saividithvjdq · 13 repos",
+    desc: "@sai-vidith · 13 repos",
     color: "accent-blue",
   },
   {

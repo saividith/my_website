@@ -49,24 +49,22 @@ export default function Navigation() {
     <>
       {/* Desktop floating nav */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 3.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300 ${
-          scrolled
+        initial={{ y: -100, x: "-50%", opacity: 0 }}
+        animate={{ y: 0, x: "-50%", opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-6 left-1/2 z-50 hidden lg:flex items-center gap-1 px-4 py-2 rounded-full transition-colors duration-300 ${scrolled
             ? "glass border border-border-default shadow-glow-sm"
             : "bg-transparent"
-        }`}
+          }`}
       >
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => scrollTo(item.id)}
-            className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-              active === item.id
+            className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${active === item.id
                 ? "text-white"
                 : "text-text-secondary hover:text-text-primary"
-            }`}
+              }`}
           >
             {active === item.id && (
               <motion.span
@@ -80,7 +78,7 @@ export default function Navigation() {
         ))}
 
         <a
-          href="https://github.com/saividithvjdq"
+          href="https://github.com/sai-vidith"
           target="_blank"
           rel="noopener noreferrer"
           className="ml-2 px-4 py-2 rounded-full text-sm font-medium bg-accent-blue text-white hover:bg-indigo-500 transition-colors"
@@ -93,7 +91,7 @@ export default function Navigation() {
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.5 }}
+        transition={{ duration: 0.3 }}
         onClick={() => setMobileOpen(!mobileOpen)}
         className="lg:hidden fixed top-4 right-4 z-50 glass p-3 rounded-xl border border-border-default"
       >
@@ -121,11 +119,10 @@ export default function Navigation() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.05 }}
                 onClick={() => scrollTo(item.id)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
-                  active === item.id
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${active === item.id
                     ? "bg-accent-blue/20 border border-accent-blue/40 text-accent-blue"
                     : "text-text-secondary hover:text-text-primary hover:bg-white/5"
-                }`}
+                  }`}
               >
                 <span className="text-lg">{item.icon}</span>
                 <span className="font-medium">{item.label}</span>
