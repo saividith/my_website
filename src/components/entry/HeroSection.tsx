@@ -68,9 +68,9 @@ export default function HeroSection({ onOpenTerminal }: HeroSectionProps) {
         >
           <TypeAnimation
             sequence={[
-              "Aspiring AI Engineer", 2000,
-              "Cloud Engineer", 2000,
-              "ML Engineer", 2000,
+              "AI/ML Engineer", 2000,
+              "Backend Engineer", 2000,
+              "Systems Builder", 2000,
             ]}
             wrapper="span"
             repeat={Infinity}
@@ -123,10 +123,10 @@ export default function HeroSection({ onOpenTerminal }: HeroSectionProps) {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-16 w-full max-w-3xl border-t border-white/[0.04] pt-8"
         >
           {[
-            { label: "AI Models", val: "5+" },
-            { label: "Backend APIs", val: "10+" },
-            { label: "Cloud Deployments", val: "8+" },
-            { label: "Years Coding", val: "3+" }
+            { label: "GPU Cluster Nodes", val: "6-8" },
+            { label: "Docs Automated", val: "100+" },
+            { label: "Hrs/Month Saved", val: "40+" },
+            { label: "Community Led", val: "200+" }
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center">
               <span className="text-xl md:text-2xl font-bold text-white/80 mb-1">{stat.val}</span>

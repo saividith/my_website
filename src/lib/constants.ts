@@ -1,20 +1,19 @@
-// All personal data for Sai Vidith's portfolio
+// All personal data for Sai Vidith's portfolio — sourced from resume + confirmed details
 
 export const PERSONAL_INFO = {
   name: "Gouribhatla Sai Vidith",
   shortName: "Sai Vidith",
   handle: "saividith",
-  title: "Backend & AI Engineer",
+  title: "AI/ML & Backend Engineer",
   roles: [
+    "AI/ML Engineer",
     "Backend Engineer",
-    "AI Systems Builder",
-    "Problem Solver",
-    "Systems Architect",
+    "Systems Builder",
     "Full-Stack Developer",
   ],
-  bio: "I build systems that scale — from distributed backends to intelligent AI pipelines. Obsessed with clean architecture, real-world AI applications, and engineering that makes a difference.",
+  bio: "Penultimate-year CSE (Data Science) student building production systems across AI/ML, backend, and infrastructure — from an 8-GPU compute cluster I run myself to RAG pipelines and a 17-year document pipeline built at INCOIS.",
   location: "Hyderabad, India",
-  institution: "Vignana Jyothi Institute of Technology",
+  institution: "VNR Vignana Jyothi Institute of Engineering and Technology",
   email: "saividith396@gmail.com",
   domain: "saividith.tech",
   github: {
@@ -22,301 +21,299 @@ export const PERSONAL_INFO = {
     secondary: "https://github.com/saividith",
   },
   linkedin: "https://linkedin.com/in/saividith",
+  resumeUrl: "/SaiVidith_Resume.pdf",
   availableForWork: true,
 };
 
+// ─────────────────────────────────────────────
+// Projects — hero tier (full case-study cards)
+// ─────────────────────────────────────────────
 export const PROJECTS = [
   {
-    id: "smart-brain",
-    title: "Smart Brain",
-    tagline: "AI-powered second brain & knowledge assistant",
+    id: "axon",
+    title: "Axon",
+    tagline: "AI-powered second brain — a deployed RAG knowledge assistant",
     description:
-      "A production-grade knowledge management system that processes, embeds, and semantically retrieves information using RAG architecture. Features multi-modal document ingestion, vector storage, and an intelligent chat interface.",
-    stack: ["Python", "FastAPI", "LangChain", "PostgreSQL", "Pinecone", "React", "Docker"],
+      "A deployed RAG knowledge system: FastAPI embeds documents via all-MiniLM-L6-v2 into ChromaDB, then routes queries across Groq (LLaMA 3.3) and Gemini. Firebase Auth with per-user Firestore profiles and a rate-limited public API, live on Render + Vercel.",
+    stack: ["FastAPI", "ChromaDB", "HuggingFace", "Groq", "Gemini", "Firebase", "Next.js"],
     category: "AI/ML",
-    github: "https://github.com/sai-vidith/Smart_Brain",
-    highlights: ["RAG architecture", "Vector embeddings", "Multi-modal ingestion", "Semantic search"],
+    link: "https://github.com/sai-vidith/Smart_Brain",
+    linkLabel: "View Source",
+    highlights: ["RAG architecture", "Multi-model routing (Groq + Gemini)", "Firebase Auth + per-user profiles", "Rate-limited public API"],
     architecture: {
-      components: ["Client", "FastAPI Gateway", "LangChain Orchestrator", "Vector DB (Pinecone)", "PostgreSQL", "Redis Cache"],
-      flow: "User Query → FastAPI → LangChain → Embed Query → Pinecone Similarity Search → Context Retrieval → LLM Response",
+      components: ["Next.js Client", "FastAPI Gateway", "MiniLM-L6-v2 Embedder", "ChromaDB", "Groq (LLaMA 3.3)", "Gemini", "Firebase Auth", "Firestore"],
+      flow: "Document Upload → Embed (MiniLM) → ChromaDB Store → User Query → Similarity Search → Route to Groq/Gemini → Grounded Response",
       decisions: [
-        { choice: "Pinecone over Chroma", reason: "Production scalability + managed infrastructure" },
-        { choice: "FastAPI over Flask", reason: "Async support, automatic OpenAPI docs, better performance" },
-        { choice: "RAG over fine-tuning", reason: "Dynamic knowledge base, lower cost, easier updates" },
+        { choice: "Dual LLM routing (Groq + Gemini)", reason: "Groq for low-latency inference, Gemini as a broader-context fallback — balances speed and capability" },
+        { choice: "ChromaDB over a managed vector DB", reason: "Self-hosted with no per-query cost — sufficient for the current scale of the knowledge base" },
       ],
-      tradeoffs: "Latency vs. accuracy: increased chunk overlap from 100→200 tokens (+15% relevant retrieval, +40ms p99 latency)",
+      tradeoffs: "Self-hosted vector DB trades managed scalability for zero marginal cost — fine at current usage, would revisit if query volume grows sharply.",
     },
     featured: true,
   },
   {
-    id: "kiro",
-    title: "KIRo",
-    tagline: "Knowledge Intelligence Retrieval system",
+    id: "ai-business-toolkit",
+    title: "AI Business Tool Kit",
+    tagline: "MCP multi-agent platform — 5 AI microservices in production",
     description:
-      "An agentic knowledge retrieval and organization system that autonomously indexes, categorizes, and cross-references information. Built on top of a multi-agent orchestration layer with tool use capabilities.",
-    stack: ["Next.js", "TypeScript", "Python", "OpenAI", "PostgreSQL", "Redis"],
+      "A containerised multi-agent AI automation platform built on MCP. A Node.js API gateway routes tasks to an Agent Registry that dispatches work across 5 Docker microservices (Website Generator, Marketing Agent, Image Generator, Analytics, VoiceBot) for end-to-end automated AI workflows.",
+    stack: ["Node.js", "MCP", "Docker", "Redis", "MongoDB", "Nginx", "WebSockets"],
     category: "AI/ML",
-    github: "https://github.com/saividith/KIRo",
-    highlights: ["Multi-agent orchestration", "Tool use", "Auto-indexing", "Cross-referencing"],
+    link: "https://github.com/sai-vidith/AI-tool-kit",
+    linkLabel: "View Source",
+    highlights: ["5 Docker microservices", "Redis inter-agent queues", "Nginx reverse proxy + rate limiting", "Non-root, resource-constrained containers"],
     architecture: {
-      components: ["Frontend (Next.js)", "Agent Orchestrator", "Tool Registry", "Knowledge Graph", "PostgreSQL", "Cache Layer"],
-      flow: "Input → Agent Router → Specialist Agents → Tool Execution → Knowledge Update → Structured Output",
+      components: ["Node.js API Gateway", "Agent Registry", "5 Docker Microservices", "Redis Queue", "MongoDB", "Nginx Reverse Proxy", "WebSocket Layer"],
+      flow: "Client Request → API Gateway → Agent Registry → Redis Queue → Dispatch to Microservice → Process → MongoDB Persist → WebSocket Update",
       decisions: [
-        { choice: "Agent-based over monolithic", reason: "Specialization, parallel execution, easier debugging" },
-        { choice: "Redis caching layer", reason: "Repeated queries served in <10ms vs 800ms DB lookup" },
+        { choice: "MCP for agent orchestration", reason: "Standardised tool-use protocol across heterogeneous agents — simpler than a bespoke dispatcher" },
+        { choice: "Non-root containers with per-agent limits", reason: "Isolates blast radius so no single agent can starve cluster resources" },
       ],
-      tradeoffs: "Agent coordination overhead vs. parallelism gains. Used async task queues to balance.",
+      tradeoffs: "Redis-based queueing adds a network hop versus direct calls, but decouples agents so one slow service can't block the gateway.",
     },
     featured: true,
   },
   {
-    id: "project-raseed",
-    title: "ProjectRaseed",
-    tagline: "AI-powered receipt & expense intelligence",
+    id: "gpu-cluster",
+    title: "VJ GPU Cluster",
+    tagline: "Distributed Ray compute cluster across 6–8 physical nodes",
     description:
-      "End-to-end expense intelligence pipeline. Receipts are OCR-processed, ML-classified by category, and aggregated into actionable financial insights with anomaly detection.",
-    stack: ["Python", "FastAPI", "OCR", "TensorFlow", "PostgreSQL", "React"],
-    category: "AI/ML",
-    github: "https://github.com/sai-vidith/ProjectRaseed",
-    highlights: ["OCR pipeline", "ML classification", "Anomaly detection", "Financial insights"],
+      "Architected and operate a production compute cluster using Ray across 6–8 physical nodes — node configuration, resource allocation, job scheduling, and real-time monitoring across heterogeneous hardware. Configured NFS for shared storage, SSH-based passwordless auth between head/worker nodes, and CUDA-aware resource allocation enabling single- and multi-GPU (8-GPU) parallel jobs with live status monitoring via a web UI.",
+    stack: ["Ray", "Python", "Docker", "Linux", "FastAPI", "CUDA", "NFS"],
+    category: "Infrastructure",
+    link: "https://cluster.vjstartup.com",
+    linkLabel: "Visit Cluster",
+    highlights: ["6–8 physical nodes", "8-GPU parallel job execution", "NFS shared storage", "Live job monitoring web UI"],
     architecture: {
-      components: ["Upload Service", "OCR Engine", "ML Classifier", "Analytics Engine", "PostgreSQL", "Dashboard"],
-      flow: "Receipt Upload → OCR Processing → Text Extraction → ML Category Classification → DB Storage → Analytics Dashboard",
+      components: ["Ray Head Node", "Ray Worker Nodes (6–8)", "NFS Shared Storage", "CUDA Resource Allocator", "FastAPI Monitoring UI"],
+      flow: "Job Submit → Ray Head Scheduler → Resource-Aware Placement → Worker Node(s) → CUDA-aware GPU Allocation → Live Status → Web UI",
       decisions: [
-        { choice: "Tesseract + custom preprocessing", reason: "Better accuracy on varied receipt formats vs. cloud OCR cost" },
-        { choice: "PostgreSQL with JSONB", reason: "Flexible schema for varied receipt structures + relational queries" },
+        { choice: "Ray over raw Slurm/Kubernetes", reason: "Python-native scheduling — faster iteration for ML workloads across heterogeneous nodes" },
+        { choice: "NFS for shared storage", reason: "Simple, POSIX-compatible shared filesystem across all nodes without extra infrastructure" },
       ],
-      tradeoffs: "Processing speed vs. accuracy. Implemented async job queue for non-blocking UX.",
+      tradeoffs: "NFS is simpler to operate than a distributed filesystem but scales less far — fine at 6–8 nodes, would need to revisit beyond that.",
     },
     featured: true,
-  },
-  {
-    id: "healthcare-blockchain",
-    title: "HealthCare Blockchain",
-    tagline: "Decentralized health record management",
-    description:
-      "A blockchain-based healthcare data management system ensuring patient data sovereignty, immutable audit trails, and selective access control for healthcare providers.",
-    stack: ["Solidity", "Web3.js", "React", "Node.js", "IPFS", "Ethereum"],
-    category: "Blockchain",
-    github: "https://github.com/sai-vidith/HealthCare-BlockChain",
-    highlights: ["Smart contracts", "IPFS storage", "Access control", "Immutable audit logs"],
-    architecture: {
-      components: ["React DApp", "Ethereum Smart Contracts", "IPFS Node", "Web3 Provider", "Event Indexer"],
-      flow: "Patient → DApp → Smart Contract → IPFS (data) + Blockchain (metadata) → Access Control Check → Provider View",
-      decisions: [
-        { choice: "IPFS for data, blockchain for metadata", reason: "Cost-efficient — only hashes on-chain, not full records" },
-        { choice: "Role-based access control", reason: "Granular permissions — patient controls who sees what" },
-      ],
-      tradeoffs: "Transaction finality latency (12-15s) vs. immutability guarantees. Used optimistic updates for UX.",
-    },
-    featured: true,
-  },
-  {
-    id: "navaidix",
-    title: "Navaidix",
-    tagline: "AI-powered navigation & intelligent indexing",
-    description:
-      "A navigation intelligence system with real-time path optimization, smart indexing of geographic data, and AI-powered route recommendations based on contextual factors.",
-    stack: ["Node.js", "Express", "PostgreSQL", "Redis", "Python", "Docker"],
-    category: "Backend",
-    github: "https://github.com/sai-vidith/Navaidix",
-    highlights: ["Path optimization", "Real-time data", "Smart indexing", "Geospatial queries"],
-    architecture: {
-      components: ["API Gateway", "Route Engine", "Cache (Redis)", "Geo DB (PostGIS)", "AI Recommender", "WebSocket"],
-      flow: "Route Request → API Gateway → Cache Check → Route Engine → PostGIS Spatial Query → AI Scoring → WebSocket Response",
-      decisions: [
-        { choice: "PostGIS over external APIs", reason: "Reduced latency, no rate limits, full control over geospatial queries" },
-        { choice: "Redis Geo commands", reason: "O(log N) nearest-neighbor searches at scale" },
-      ],
-      tradeoffs: "Freshness vs. performance: TTL-based cache invalidation for route data (30s for traffic, 1h for static)",
-    },
-    featured: false,
   },
   {
     id: "ambulance-detection",
-    title: "Ambulance Detection",
-    tagline: "Real-time emergency vehicle detection with YOLOv8",
+    title: "Emergency Vehicle Detection",
+    tagline: "Real-time emergency vehicle detection at 25+ FPS with YOLOv8",
     description:
-      "Computer vision system for real-time emergency vehicle detection in traffic surveillance footage. Achieves 94.2% mAP50 using a custom-tuned YOLOv8 model with optimized inference pipeline.",
-    stack: ["Python", "YOLOv8", "OpenCV", "FastAPI", "WebSocket", "TensorRT"],
+      "A real-time object detection pipeline using YOLOv8 and PyTorch, training a custom model to identify emergency vehicles in live video streams. Optimised the inference pipeline for real-time throughput and packaged it into a production-ready system with application-level decision logic.",
+    stack: ["YOLOv8", "PyTorch", "OpenCV", "Python"],
     category: "AI/ML",
-    github: "https://github.com/sai-vidith/Ambulance-Detection-using-YOLOv8",
-    highlights: ["94.2% mAP50", "Real-time inference", "TensorRT optimization", "Live WebSocket feed"],
+    link: "https://github.com/sai-vidith/Ambulance-Detection-using-YOLOv8",
+    linkLabel: "View Source",
+    highlights: ["Custom-trained YOLOv8 model", "25+ FPS real-time inference", "OpenCV video pipeline", "Application-level decision logic"],
     architecture: {
-      components: ["Camera Feed", "Preprocessing Pipeline", "YOLOv8 Model", "TensorRT Runtime", "Alert System", "Dashboard"],
-      flow: "Video Stream → Frame Extraction → Preprocessing → YOLOv8 Inference → Confidence Scoring → Alert → Dashboard",
+      components: ["Video Stream", "OpenCV Frame Extraction", "YOLOv8 Model", "PyTorch Runtime", "Decision Logic", "Alert Output"],
+      flow: "Video Feed → Frame Extraction (OpenCV) → YOLOv8 Inference → Confidence Filtering → Decision Logic → Alert/Output",
       decisions: [
-        { choice: "TensorRT over vanilla PyTorch", reason: "2.3x speedup, 60% memory reduction, critical for real-time needs" },
-        { choice: "Custom dataset augmentation", reason: "+8% mAP improvement over base YOLOv8 on ambulance-specific features" },
+        { choice: "YOLOv8 over two-stage detectors", reason: "Single-stage detection needed to sustain real-time FPS on live video" },
+        { choice: "Custom training on emergency-vehicle data", reason: "Base COCO classes don't distinguish emergency vehicles — required a fine-tuned dataset" },
       ],
-      tradeoffs: "Accuracy vs. latency: YOLOv8n (faster, 89% mAP) vs YOLOv8m (slower, 94.2% mAP). Chose medium for safety-critical use.",
-    },
-    featured: true,
-  },
-  {
-    id: "smart-tourist",
-    title: "Smart Tourist System",
-    tagline: "AI-guided tourism experience platform",
-    description:
-      "An intelligent tourism platform providing personalized itinerary generation, real-time local recommendations, and augmented reality points of interest using AI and geolocation.",
-    stack: ["React", "Node.js", "Python", "MongoDB", "Google Maps API", "OpenAI"],
-    category: "Full-Stack",
-    github: "https://github.com/saividith/smart-tourist-system",
-    highlights: ["AI itineraries", "Real-time recommendations", "AR integration", "Geolocation"],
-    architecture: {
-      components: ["Mobile/Web Frontend", "Node.js API", "AI Service (Python)", "MongoDB", "Maps API", "Cache"],
-      flow: "User Preferences → AI Service → Itinerary Generation → POI Scoring → Real-time Updates → Personalized Feed",
-      decisions: [
-        { choice: "MongoDB for POI data", reason: "Geospatial indexes, flexible schema for diverse attraction types" },
-        { choice: "Microservice for AI", reason: "Independent scaling of compute-heavy AI vs. lightweight API calls" },
-      ],
-      tradeoffs: "Personalization quality vs. cold-start problem. Used collaborative filtering with fallback to popularity-based.",
-    },
-    featured: false,
-  },
-  {
-    id: "ai-business-tool-kit",
-    title: "AI Business Tool Kit",
-    tagline: "Comprehensive toolkit for AI business solutions",
-    description: "A business-focused tool kit that leverages AI capabilities to streamline operations and enhance productivity.",
-    stack: ["JavaScript", "Node.js", "AI Integration"],
-    category: "AI/ML",
-    github: "https://github.com/sai-vidith/AI-tool-kit",
-    highlights: ["Business automation", "AI integration", "Productivity enhancement"],
-    architecture: {
-      components: ["Frontend", "AI Core Service", "Integration Layer"],
-      flow: "User Request → AI Core Service → Processing → Actionable Business Insights",
-      decisions: [
-        { choice: "Modular architecture", reason: "Easy integration of various AI tools" }
-      ],
-      tradeoffs: "Generality vs Specificity: focused on common business use cases to maximize utility."
-    },
-    featured: true,
-  },
-  {
-    id: "bias-detection",
-    title: "Bias Detection AI",
-    tagline: "Mitigating unconscious bias in hiring & evaluations",
-    description: "An AI-powered tool that detects and mitigates unconscious bias by analyzing decision-making patterns, evaluating historical data, and providing real-time insights for equitable outcomes.",
-    stack: ["Python", "Machine Learning", "Data Analytics"],
-    category: "AI/ML",
-    github: "https://github.com/sai-vidith/Bias_Detection",
-    highlights: ["Pattern discovery", "Bias mitigation", "Real-time insights"],
-    architecture: {
-      components: ["Data Processing Pipeline", "Bias Detection Model", "Analytics Dashboard"],
-      flow: "Historical Data → Model Evaluation → Pattern Recognition → Insight Generation",
-      decisions: [
-        { choice: "White-box model evaluation", reason: "Interpretability is critical for fairness assessment" }
-      ],
-      tradeoffs: "Model complexity vs Interpretability."
+      tradeoffs: "Traded a small amount of accuracy for inference speed by choosing a lighter YOLOv8 variant, prioritising real-time responsiveness.",
     },
     featured: true,
   },
 ];
 
+// ─────────────────────────────────────────────
+// More work — smaller, description-only cards
+// ─────────────────────────────────────────────
+export const MORE_PROJECTS = [
+  {
+    id: "blog-app",
+    title: "Blog App",
+    tagline: "Full-stack blog platform with auth, CRUD posts, and user management",
+    stack: ["MongoDB", "Express", "React", "Node.js"],
+    link: "https://github.com/sai-vidith/Blog-App",
+    linkLabel: "View Source",
+  },
+  {
+    id: "vj-dataquesters-website",
+    title: "VJ DataQuesters Website",
+    tagline: "College club website with event listings and registration, built while leading the club's technical initiatives",
+    stack: ["React", "JavaScript"],
+    link: "https://github.com/vjdataquesters/WebsiteESG",
+    linkLabel: "View Source",
+  },
+];
+
+// ─────────────────────────────────────────────
+// Research
+// ─────────────────────────────────────────────
+export const RESEARCH = [
+  {
+    id: "greenwashing",
+    title: "ESG Greenwashing Detection",
+    venue: "IEEE — submitted",
+    description:
+      "Research applying Gradient Boosting to detect ESG greenwashing signals across 835 firms, using SHAP for interpretability and a Streamlit app to explore predictions.",
+    stack: ["Python", "scikit-learn", "SHAP", "Streamlit"],
+    metrics: ["835 firms analysed", "F1 = 0.97", "SHAP-based interpretability"],
+    link: null as string | null,
+  },
+];
+
+// ─────────────────────────────────────────────
+// Skills — grouped, no arbitrary numeric levels
+// ─────────────────────────────────────────────
 export const SKILLS = [
   {
     category: "Languages",
     icon: "💻",
-    items: [
-      { name: "Python", level: 92 },
-      { name: "TypeScript/JavaScript", level: 88 },
-      { name: "SQL", level: 85 },
-      { name: "Java", level: 75 },
-      { name: "Solidity", level: 65 },
-    ],
+    items: ["Python", "JavaScript", "TypeScript", "SQL", "Bash", "Java"],
   },
   {
-    category: "AI / ML",
+    category: "AI / ML & Data",
     icon: "🧠",
-    items: [
-      { name: "LangChain / LangGraph", level: 88 },
-      { name: "YOLOv8 / Computer Vision", level: 85 },
-      { name: "TensorFlow / PyTorch", level: 80 },
-      { name: "RAG Architecture", level: 90 },
-      { name: "Prompt Engineering", level: 87 },
-      { name: "Scikit-learn", level: 82 },
-    ],
+    items: ["PyTorch", "HuggingFace", "YOLOv8", "RAG / ChromaDB", "NumPy", "Pandas", "Data Visualisation"],
   },
   {
-    category: "Backend",
+    category: "Backend & APIs",
     icon: "⚙️",
-    items: [
-      { name: "FastAPI", level: 90 },
-      { name: "Node.js / Express", level: 88 },
-      { name: "REST API Design", level: 92 },
-      { name: "Microservices", level: 80 },
-      { name: "WebSockets / gRPC", level: 75 },
-    ],
+    items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets", "MCP"],
   },
   {
     category: "Databases",
     icon: "🗄️",
-    items: [
-      { name: "PostgreSQL / PostGIS", level: 87 },
-      { name: "MongoDB", level: 82 },
-      { name: "Redis", level: 80 },
-      { name: "Pinecone (Vector DB)", level: 85 },
-      { name: "IPFS", level: 65 },
-    ],
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "ChromaDB"],
   },
   {
-    category: "Cloud / DevOps",
+    category: "Cloud & DevOps",
     icon: "☁️",
-    items: [
-      { name: "Docker / Docker Compose", level: 85 },
-      { name: "AWS (EC2, S3, Lambda)", level: 78 },
-      { name: "GitHub Actions CI/CD", level: 82 },
-      { name: "Linux / Shell Scripting", level: 80 },
-    ],
+    items: ["Docker", "Kubernetes (basics)", "Linux", "Nginx", "AWS (basics)", "GCP"],
   },
   {
-    category: "Frontend",
-    icon: "🎨",
-    items: [
-      { name: "React / Next.js", level: 85 },
-      { name: "Tailwind CSS", level: 88 },
-      { name: "Framer Motion", level: 75 },
-      { name: "TypeScript", level: 85 },
-    ],
+    category: "Tools",
+    icon: "🛠️",
+    items: ["Git", "GitHub", "JIRA", "Splunk (basics)"],
   },
 ];
 
+// ─────────────────────────────────────────────
+// Work experience — reverse chronological
+// ─────────────────────────────────────────────
+export const WORK_EXPERIENCE = [
+  {
+    title: "Fullstack Intern",
+    organization: "Trovofi Pvt Ltd",
+    location: "trovofi.in",
+    period: "Oct 2025 – Dec 2025",
+    description:
+      "Built and shipped the frontend and backend for www.trovofi.in over a 3-month internship, including automated email workflows and database-backed storage for user data.",
+    highlights: ["Frontend + backend of trovofi.in", "Email automation with Nodemailer", "Firebase for data storage"],
+  },
+  {
+    title: "AI/ML Project Intern",
+    organization: "INCOIS (Indian National Centre for Ocean Information Services)",
+    location: "Hyderabad, India",
+    period: "Mar 2025 – May 2025",
+    description:
+      "Designed and implemented an end-to-end Python data pipeline to ingest, process, and structure 17 years of domain-specific documents (2008–2025) — ETL across 100+ large-scale PDFs with OCR fallback for scanned documents. Automated document workflows to eliminate 40+ hours/month of manual effort, and maintained the pipeline end-to-end, diagnosing and fixing format-specific extraction failures.",
+    highlights: ["17 years of documents processed", "100+ PDFs, OCR fallback", "40+ hrs/month automated", "Worked directly with domain scientists"],
+  },
+];
+
+// ─────────────────────────────────────────────
+// Leadership & achievements
+// ─────────────────────────────────────────────
+export const LEADERSHIP = [
+  {
+    title: "Tech Lead",
+    organization: "VJ DataQuesters",
+    period: "2024 – Present",
+    description: "Led technical initiatives for a 200+ member community (50+ technical); shipped production features to the club platform and mentored junior members on engineering best practices.",
+  },
+  {
+    title: "Runner-up",
+    organization: "Technovista Hackathon",
+    period: "2024",
+    description: "Delivered a working AI-based system under time constraints, demonstrating end-to-end problem solving and team execution in a competitive setting.",
+  },
+  {
+    title: "Rank 47 / Top 100",
+    organization: "Competitive Programming Contest",
+    period: "",
+    description: "Solved 160+ problems across arrays, graphs, dynamic programming, and algorithms on LeetCode.",
+  },
+];
+
+// ─────────────────────────────────────────────
+// Education
+// ─────────────────────────────────────────────
+export const EDUCATION = {
+  institution: "VNR Vignana Jyothi Institute of Engineering and Technology",
+  degree: "B.Tech, Computer Science and Engineering (Data Science)",
+  location: "Hyderabad, India",
+  period: "2023 – 2027",
+  cgpa: "8.87",
+};
+
+// Combined timeline used by the terminal "About" view and Experience section
 export const EXPERIENCE = [
   {
-    type: "education",
-    title: "B.Tech in Computer Science Engineering",
-    organization: "Vignana Jyothi Institute of Technology",
+    type: "work",
+    title: WORK_EXPERIENCE[0].title,
+    organization: WORK_EXPERIENCE[0].organization,
+    location: WORK_EXPERIENCE[0].location,
+    period: WORK_EXPERIENCE[0].period,
+    description: WORK_EXPERIENCE[0].description,
+    highlights: WORK_EXPERIENCE[0].highlights,
+  },
+  {
+    type: "work",
+    title: WORK_EXPERIENCE[1].title,
+    organization: WORK_EXPERIENCE[1].organization,
+    location: WORK_EXPERIENCE[1].location,
+    period: WORK_EXPERIENCE[1].period,
+    description: WORK_EXPERIENCE[1].description,
+    highlights: WORK_EXPERIENCE[1].highlights,
+  },
+  {
+    type: "leadership",
+    title: LEADERSHIP[0].title,
+    organization: LEADERSHIP[0].organization,
     location: "Hyderabad, India",
-    period: "2022 – Present",
-    description: "Specializing in AI/ML and distributed systems. Active in technical clubs and competitive programming.",
-    highlights: ["System Design Club Lead", "AI/ML Research Projects", "Backend Engineering Focus"],
+    period: LEADERSHIP[0].period,
+    description: LEADERSHIP[0].description,
+    highlights: ["200+ member community", "Production features shipped", "Mentored junior members"],
   },
   {
     type: "achievement",
-    title: "AI & GenAI Credentials",
-    organization: "IBM, AWS & Credly",
-    location: "Online",
-    period: "2024 – 2025",
-    description: "Earned multiple verified credentials in AI, cloud computing, and GenAI from IBM, AWS, and other platforms.",
-    highlights: ["IBM AI Fundamentals", "AWS Cloud Practitioner", "GenAI Certification", "Credly Verified Profile"],
+    title: `${LEADERSHIP[1].title} — ${LEADERSHIP[1].organization}`,
+    organization: LEADERSHIP[1].organization,
+    location: "",
+    period: LEADERSHIP[1].period,
+    description: LEADERSHIP[1].description,
+    highlights: [],
   },
   {
-    type: "project",
-    title: "System Design Club — Lead",
-    organization: "VJ Institute of Technology",
-    location: "Hyderabad, India",
-    period: "2024 – Present",
-    description: "Founded and led the System Design Club, organizing workshops on scalability, reliability, distributed systems, and real-world architecture patterns. Ran the Summer System Design event for 2026.",
-    highlights: ["50+ members", "System Design workshops", "Real-world case studies", "Summer SSD Event 2026"],
+    type: "achievement",
+    title: `${LEADERSHIP[2].title} — LeetCode`,
+    organization: LEADERSHIP[2].organization,
+    location: "",
+    period: LEADERSHIP[2].period,
+    description: LEADERSHIP[2].description,
+    highlights: ["160+ problems solved"],
+  },
+  {
+    type: "education",
+    title: EDUCATION.degree,
+    organization: EDUCATION.institution,
+    location: EDUCATION.location,
+    period: EDUCATION.period,
+    description: `CGPA: ${EDUCATION.cgpa} / 10`,
+    highlights: [`CGPA ${EDUCATION.cgpa}`],
   },
 ];
 
 export const CERTIFICATIONS = [
-  { name: "IBM AI Fundamentals", issuer: "IBM", year: "2024" },
-  { name: "AWS Cloud Practitioner", issuer: "AWS", year: "2024" },
-  { name: "GenAI Certification", issuer: "Google/Credly", year: "2025" },
-  { name: "Python for Data Science", issuer: "IBM", year: "2024" },
+  { name: "AI Fundamentals", issuer: "IBM SkillsBuild / Cisco" },
+  { name: "Prompt Design in Vertex AI", issuer: "Google Cloud" },
+  { name: "SQL", issuer: "HackerRank" },
 ];
 
 export const SYSTEM_PHILOSOPHY = [
@@ -345,6 +342,6 @@ export const SYSTEM_PHILOSOPHY = [
 export const CURRENTLY_LEARNING = [
   "Kubernetes & container orchestration at scale",
   "LLM fine-tuning & RLHF workflows",
-  "Rust for systems programming",
-  "Distributed consensus algorithms (Raft, Paxos)",
+  "Diffusion-based video generation (ComfyUI)",
+  "Distributed systems at cluster scale",
 ];

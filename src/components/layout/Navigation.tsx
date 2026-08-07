@@ -10,7 +10,8 @@ const navItems = [
   { id: "projects", label: "Projects", icon: "◧" },
   { id: "system-design", label: "System", icon: "⬡" },
   { id: "skills", label: "Skills", icon: "◈" },
-  { id: "experience", label: "XP", icon: "◉" },
+  { id: "experience", label: "Work", icon: "◉" },
+  { id: "resume", label: "Resume", icon: "📄" },
   { id: "playground", label: "Lab", icon: "⬢" },
   { id: "contact", label: "Contact", icon: "◈" },
 ];

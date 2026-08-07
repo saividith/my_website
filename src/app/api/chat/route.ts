@@ -1,51 +1,54 @@
 import { NextRequest, NextResponse } from "next/server";
 import Groq from "groq-sdk";
+import {
+  PERSONAL_INFO,
+  PROJECTS,
+  MORE_PROJECTS,
+  RESEARCH,
+  SKILLS,
+  WORK_EXPERIENCE,
+  EDUCATION,
+  LEADERSHIP,
+  CERTIFICATIONS,
+  SYSTEM_PHILOSOPHY,
+  CURRENTLY_LEARNING,
+} from "@/lib/constants";
 
-const SYSTEM_PROMPT = `You are SV-AI, the personal AI assistant for Sai Vidith (Gouribhatla Sai Vidith), a backend and AI engineer based in Hyderabad, India. You are embedded in his portfolio website.
+const SYSTEM_PROMPT = `You are SV-AI, the personal AI assistant for Sai Vidith (Gouribhatla Sai Vidith), an AI/ML and backend engineer based in ${PERSONAL_INFO.location}. You are embedded in his portfolio website.
 
 About Sai Vidith:
-- Student at Vignana Jyothi Institute of Technology, pursuing B.Tech in Computer Science
-- Specializes in Backend Engineering and AI/ML systems
+- Student at ${EDUCATION.institution}, pursuing ${EDUCATION.degree} (${EDUCATION.period}, CGPA ${EDUCATION.cgpa})
+- Specializes in AI/ML systems and backend engineering
 - GitHub: @sai-vidith and @saividith
-- Email: saividith396@gmail.com
+- Email: ${PERSONAL_INFO.email}
 - Available for internships and opportunities
 
+Work Experience:
+${WORK_EXPERIENCE.map((w) => `- ${w.title}, ${w.organization} (${w.period}): ${w.description}`).join("\n")}
+
 Key Projects:
-1. Smart Brain - AI-powered second brain using RAG architecture (Python, FastAPI, LangChain, Pinecone, PostgreSQL, React)
-2. KIRo - Knowledge Intelligence Retrieval system with multi-agent orchestration (Next.js, TypeScript, Python, OpenAI)
-3. ProjectRaseed - AI receipt/expense intelligence pipeline with OCR and ML classification (Python, FastAPI, TensorFlow)
-4. HealthCare Blockchain - Decentralized health records with smart contracts (Solidity, Web3.js, IPFS, Ethereum)
-5. Navaidix - Navigation AI system with geospatial queries (Node.js, PostGIS, Redis, Docker)
-6. Ambulance Detection - Real-time emergency vehicle detection at 94.2% mAP50 (Python, YOLOv8, TensorRT)
-7. Smart Tourist System - AI-guided tourism platform (React, Node.js, Python, MongoDB, OpenAI)
+${PROJECTS.map((p, i) => `${i + 1}. ${p.title} - ${p.tagline} (${p.stack.join(", ")})`).join("\n")}
+
+Also built: ${MORE_PROJECTS.map((p) => p.title).join(", ")}.
+
+Research:
+${RESEARCH.map((r) => `- ${r.title} (${r.venue}): ${r.description}`).join("\n")}
 
 Skills:
-- Languages: Python (expert), TypeScript/JavaScript (advanced), SQL (advanced), Java, Solidity
-- AI/ML: LangChain, LangGraph, YOLOv8, TensorFlow, PyTorch, RAG, Prompt Engineering
-- Backend: FastAPI, Node.js/Express, REST APIs, Microservices, WebSockets
-- Databases: PostgreSQL/PostGIS, MongoDB, Redis, Pinecone (vector DB)
-- DevOps: Docker, AWS, GitHub Actions, Linux/Shell
-- Frontend: React, Next.js, Tailwind CSS
+${SKILLS.map((s) => `- ${s.category}: ${s.items.join(", ")}`).join("\n")}
 
-Experience:
-- System Design Club Lead at VJ Institute of Technology
-- IBM AI Fundamentals certification
-- AWS Cloud Practitioner certification
-- GenAI credentials on Credly
+Leadership & Achievements:
+${LEADERSHIP.map((l) => `- ${l.title}${l.organization ? `, ${l.organization}` : ""}: ${l.description}`).join("\n")}
+
+Certifications: ${CERTIFICATIONS.map((c) => `${c.name} (${c.issuer})`).join(", ")}
 
 System Design Philosophy:
-- Design for failure with circuit breakers and graceful degradation
-- Cache aggressively, invalidate carefully
-- APIs are contracts — version from v1
-- Measure then optimize (no premature optimization)
+${SYSTEM_PHILOSOPHY.map((p) => `- ${p.title}: ${p.description}`).join("\n")}
 
 Currently Learning:
-- Kubernetes & container orchestration
-- LLM fine-tuning & RLHF
-- Rust for systems programming
-- Distributed consensus algorithms
+${CURRENTLY_LEARNING.map((c) => `- ${c}`).join("\n")}
 
-Be conversational, technically precise, and enthusiastic. When asked about system design or architecture decisions, explain the tradeoffs clearly. Keep responses concise (2-4 paragraphs max). If asked about something outside Sai Vidith's portfolio, politely redirect.`;
+Be conversational, technically precise, and enthusiastic. When asked about system design or architecture decisions, explain the tradeoffs clearly. Keep responses concise (2-4 paragraphs max). Only state facts given above — do not invent metrics, dates, or projects. If asked about something outside Sai Vidith's portfolio, politely redirect.`;
 
 // Simple in-memory rate limiter
 const requestMap = new Map<string, { count: number; resetTime: number }>();
@@ -139,23 +142,23 @@ function getFallbackResponse(message: string): string {
   const lower = message.toLowerCase();
 
   if (lower.includes("project") || lower.includes("build")) {
-    return "Sai Vidith has built 7 major projects including Smart Brain (RAG-powered knowledge system), KIRo (multi-agent knowledge retrieval), ProjectRaseed (AI receipt intelligence), HealthCare Blockchain, Navaidix, Ambulance Detection with YOLOv8 at 94.2% mAP50, and Smart Tourist System. Each features a full system architecture — check the Projects section to explore them in depth!";
+    return `Sai Vidith's core projects: ${PROJECTS.map((p) => p.title).join(", ")}. He also built ${MORE_PROJECTS.map((p) => p.title).join(" and ")}, and has a research paper on ${RESEARCH[0].title} (${RESEARCH[0].venue}). Check the Projects section to explore each one in depth!`;
   }
   if (lower.includes("skill") || lower.includes("tech") || lower.includes("stack")) {
-    return "Sai Vidith's core stack: Python & FastAPI for backends, LangChain + RAG for AI systems, YOLOv8 for computer vision, PostgreSQL + Redis + Pinecone for data layer, Docker + AWS for infrastructure, and React/Next.js when frontend is needed. The AI/ML side is where he's especially strong.";
+    return `Sai Vidith's core stack: ${SKILLS.map((s) => s.items.slice(0, 2).join("/")).join(", ")}, across ${SKILLS.map((s) => s.category).join(", ")}. The AI/ML and backend side is where he's especially strong.`;
   }
-  if (lower.includes("contact") || lower.includes("hire") || lower.includes("email") || lower.includes("work")) {
-    return "Sai Vidith is actively looking for opportunities! You can reach him at saividith396@gmail.com, or via GitHub (@sai-vidith / @saividith). He's particularly interested in backend engineering and AI systems roles.";
+  if (lower.includes("contact") || lower.includes("hire") || lower.includes("email")) {
+    return `Sai Vidith is actively looking for opportunities! You can reach him at ${PERSONAL_INFO.email}, or via GitHub (@sai-vidith / @saividith). He's particularly interested in AI/ML and backend engineering roles.`;
   }
-  if (lower.includes("experience") || lower.includes("background")) {
-    return "Sai Vidith is pursuing B.Tech in CS at Vignana Jyothi Institute of Technology. He leads the System Design Club on campus, holds IBM AI Fundamentals, AWS Cloud Practitioner, and GenAI certifications. His practical experience comes from building real-world AI and backend systems.";
+  if (lower.includes("experience") || lower.includes("intern") || lower.includes("background") || lower.includes("work")) {
+    return `Sai Vidith is pursuing ${EDUCATION.degree} at ${EDUCATION.institution} (CGPA ${EDUCATION.cgpa}). He interned as ${WORK_EXPERIENCE[0].title} at ${WORK_EXPERIENCE[0].organization} (${WORK_EXPERIENCE[0].period}) and as ${WORK_EXPERIENCE[1].title} at ${WORK_EXPERIENCE[1].organization} (${WORK_EXPERIENCE[1].period}), plus leads ${LEADERSHIP[0].organization} as ${LEADERSHIP[0].title}.`;
   }
   if (lower.includes("system design") || lower.includes("architecture") || lower.includes("scale")) {
     return "Sai Vidith's system design philosophy: Design for failure (circuit breakers, graceful degradation), cache aggressively at the right layer (Redis for hot data), treat APIs as contracts (version from v1, never break backwards compatibility), and measure before optimizing — never guess at bottlenecks.";
   }
   if (lower.includes("learn") || lower.includes("current") || lower.includes("now")) {
-    return "Right now Sai Vidith is diving into: Kubernetes & container orchestration at scale, LLM fine-tuning & RLHF workflows, Rust for systems programming, and distributed consensus algorithms (Raft, Paxos). Always building at the frontier.";
+    return `Right now Sai Vidith is diving into: ${CURRENTLY_LEARNING.join("; ")}. Always building at the frontier.`;
   }
 
-  return "I'm SV-AI — Sai Vidith's portfolio assistant. Ask me about his **projects** (Smart Brain, KIRo, Ambulance Detection...), **tech stack** (Python, FastAPI, LangChain, YOLOv8...), **system design philosophy**, or how to **contact him**. What would you like to know?";
+  return `I'm SV-AI — Sai Vidith's portfolio assistant. Ask me about his **projects** (${PROJECTS.slice(0, 2).map((p) => p.title).join(", ")}...), **tech stack**, **experience**, or how to **contact him**. What would you like to know?`;
 }

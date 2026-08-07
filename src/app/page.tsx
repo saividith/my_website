@@ -10,6 +10,7 @@ import SystemDesignSection from '@/components/entry/SystemDesignSection';
 import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
 import Experience from '@/components/sections/Experience';
+import Resume from '@/components/sections/Resume';
 import Contact from '@/components/sections/Contact';
 import Navigation from '@/components/layout/Navigation';
 
@@ -120,6 +121,11 @@ export default function Home() {
         {/* Experience Timeline */}
         <div id="experience">
           <Experience />
+        </div>
+
+        {/* Resume */}
+        <div id="resume">
+          <Resume />
         </div>
 
         {/* Interactive Playground */}

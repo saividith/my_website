@@ -30,26 +30,17 @@ export default function SkillsView({ onBack }: SkillsViewProps) {
                 </h3>
               </div>
 
-              <div className="space-y-3.5">
+              <div className="flex flex-wrap gap-2">
                 {category.items.map((skill, skillIdx) => (
-                  <div key={skill.name}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs text-white/50 font-mono">{skill.name}</span>
-                      <span className="text-[10px] text-white/20 font-mono">{skill.level}%</span>
-                    </div>
-                    <div className="h-1 bg-white/[0.04] rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full bg-gradient-to-r from-accent-cyan/80 to-accent-purple/80"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{
-                          delay: catIdx * 0.08 + skillIdx * 0.05 + 0.3,
-                          duration: 0.8,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: catIdx * 0.08 + skillIdx * 0.03 + 0.3, duration: 0.3 }}
+                    className="text-xs text-white/50 font-mono px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06]"
+                  >
+                    {skill}
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
@@ -65,7 +56,7 @@ export default function SkillsView({ onBack }: SkillsViewProps) {
           <h3 className="font-mono text-xs tracking-[0.15em] uppercase text-white/30 mb-4">
             Certifications
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {CERTIFICATIONS.map((cert) => (
               <div
                 key={cert.name}
@@ -74,7 +65,7 @@ export default function SkillsView({ onBack }: SkillsViewProps) {
               >
                 <p className="text-sm text-white/60 font-medium mb-1">{cert.name}</p>
                 <p className="font-mono text-[10px] text-white/25">
-                  {cert.issuer} · {cert.year}
+                  {cert.issuer}
                 </p>
               </div>
             ))}

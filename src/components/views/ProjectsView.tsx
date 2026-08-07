@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ViewShell from '@/components/ui/ViewShell';
-import { PROJECTS } from '@/lib/constants';
+import { PROJECTS, MORE_PROJECTS } from '@/lib/constants';
 
 interface ProjectDetailProps {
   project: typeof PROJECTS[0];
@@ -126,9 +126,9 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </div>
           </div>
 
-          {/* GitHub Link */}
+          {/* Primary Link */}
           <a
-            href={project.github}
+            href={project.link}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-mono
@@ -136,7 +136,7 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               hover:text-accent-cyan hover:border-accent-cyan/30 hover:bg-accent-cyan/[0.05]
               transition-all duration-200"
           >
-            View Source ↗
+            {project.linkLabel} ↗
           </a>
         </div>
       </motion.div>
@@ -150,7 +150,7 @@ interface ProjectsViewProps {
 
 export default function ProjectsView({ onBack }: ProjectsViewProps) {
   const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
-  const featuredProjects = PROJECTS.filter(p => p.featured).slice(0, 3);
+  const featuredProjects = PROJECTS.filter(p => p.featured);
 
   return (
     <ViewShell title="Projects" subtitle="// Featured Work" onBack={onBack}>
@@ -214,6 +214,26 @@ export default function ProjectsView({ onBack }: ProjectsViewProps) {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* More work */}
+      <div className="mt-8">
+        <h3 className="font-mono text-xs tracking-[0.15em] uppercase text-white/30 mb-4">More Work</h3>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {MORE_PROJECTS.map((project) => (
+            <a
+              key={project.id}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]
+                hover:border-accent-cyan/20 transition-all duration-200"
+            >
+              <p className="text-sm text-white/60 font-medium mb-1">{project.title}</p>
+              <p className="text-xs text-white/30 leading-relaxed">{project.tagline}</p>
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Detail panel */}

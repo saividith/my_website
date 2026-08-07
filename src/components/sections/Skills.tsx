@@ -41,23 +41,18 @@ export default function Skills() {
                 <span className="text-xl">{group.icon}</span>
                 <h3 className="font-semibold text-text-primary text-sm">{group.category}</h3>
               </div>
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
                 {group.items.map((skill, si) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-1.5">
-                      <span className="text-xs font-mono text-text-secondary">{skill.name}</span>
-                      <span className="text-xs font-mono text-accent-cyan">{skill.level}%</span>
-                    </div>
-                    <div className="skill-bar-track">
-                      <motion.div
-                        className="skill-bar-fill"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: si * 0.08 + gi * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                      />
-                    </div>
-                  </div>
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: si * 0.03 + gi * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-xs font-mono px-2.5 py-1.5 rounded-lg bg-bg-primary border border-border-subtle text-text-secondary"
+                  >
+                    {skill}
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
@@ -72,7 +67,7 @@ export default function Skills() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="section-subtitle text-center mb-6">{'// CERTIFICATIONS'}</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
             {CERTIFICATIONS.map((cert, i) => (
               <motion.div
                 key={cert.name}
@@ -85,7 +80,6 @@ export default function Skills() {
                 <div className="text-2xl mb-2">🏆</div>
                 <div className="text-xs font-semibold text-text-primary leading-tight mb-1">{cert.name}</div>
                 <div className="text-[10px] text-accent-blue font-mono">{cert.issuer}</div>
-                <div className="text-[10px] text-text-muted mt-1">{cert.year}</div>
               </motion.div>
             ))}
           </div>
@@ -110,7 +104,7 @@ export default function Skills() {
               <span className="text-2xl">⊹</span>
               <div>
                 <div className="font-semibold text-text-primary text-sm">@sai-vidith</div>
-                <div className="text-text-muted text-xs">13 repositories · Backend & AI projects</div>
+                <div className="text-text-muted text-xs">Primary — backend & AI projects</div>
               </div>
             </a>
             <a
@@ -122,7 +116,7 @@ export default function Skills() {
               <span className="text-2xl">◈</span>
               <div>
                 <div className="font-semibold text-text-primary text-sm">@saividith</div>
-                <div className="text-text-muted text-xs">6 repositories · Knowledge systems</div>
+                <div className="text-text-muted text-xs">Secondary — knowledge systems</div>
               </div>
             </a>
           </div>

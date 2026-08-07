@@ -4,15 +4,17 @@ import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/lib/constants";
 
 const TYPE_COLORS: Record<string, string> = {
+  work: "accent-green",
   education: "accent-blue",
   achievement: "accent-purple",
-  project: "accent-green",
+  leadership: "accent-cyan",
 };
 
 const TYPE_ICONS: Record<string, string> = {
+  work: "💼",
   education: "🎓",
   achievement: "🏆",
-  project: "⚙️",
+  leadership: "⚡",
 };
 
 export default function Experience() {

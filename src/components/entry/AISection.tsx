@@ -15,7 +15,7 @@ const SUGGESTIONS = [
   'What projects has he built?',
   'Explain his system design approach',
   'What technologies does he use?',
-  'Tell me about Smart Brain',
+  'Tell me about the GPU Cluster',
 ];
 
 export default function AISection() {

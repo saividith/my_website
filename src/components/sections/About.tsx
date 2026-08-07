@@ -1,20 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PERSONAL_INFO, SYSTEM_PHILOSOPHY, CURRENTLY_LEARNING } from "@/lib/constants";
+import { PERSONAL_INFO, SYSTEM_PHILOSOPHY, CURRENTLY_LEARNING, LEADERSHIP, EDUCATION } from "@/lib/constants";
 
 const STATS = [
-  { label: "Projects Built", value: "7+", unit: "projects", color: "accent-blue" },
-  { label: "AI/ML Systems", value: "5+", unit: "deployed", color: "accent-cyan" },
-  { label: "Certifications", value: "4+", unit: "verified", color: "accent-purple" },
-  { label: "Experience", value: "2+", unit: "years", color: "accent-green" },
-];
-
-const PROCESS_BAR = [
-  { label: "CPU (Problem Solving)", value: 92 },
-  { label: "RAM (Learning Speed)", value: 88 },
-  { label: "GPU (AI Processing)", value: 90 },
-  { label: "DISK (Knowledge Base)", value: 85 },
+  { label: "CGPA", value: EDUCATION.cgpa, unit: "/ 10", color: "accent-blue" },
+  { label: "Community Led", value: "200+", unit: "members", color: "accent-cyan" },
+  { label: "Manual Effort Cut", value: "40+", unit: "hrs / month", color: "accent-purple" },
+  { label: "Problems Solved", value: "160+", unit: "LeetCode", color: "accent-green" },
 ];
 
 export default function About() {
@@ -61,7 +54,7 @@ export default function About() {
               </div>
               <p className="text-text-secondary text-sm leading-relaxed">{PERSONAL_INFO.bio}</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["Python", "FastAPI", "LangChain", "YOLOv8", "React", "Docker"].map((tag) => (
+                {["Python", "FastAPI", "Ray", "YOLOv8", "Next.js", "Docker"].map((tag) => (
                   <span
                     key={tag}
                     className="text-xs px-2.5 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-mono"
@@ -113,9 +106,9 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right: System load + Philosophy */}
+          {/* Right: Leadership + Philosophy */}
           <div className="space-y-6">
-            {/* System load */}
+            {/* Leadership & achievements */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -127,30 +120,26 @@ export default function About() {
                 <div className="terminal-btn red" />
                 <div className="terminal-btn yellow" />
                 <div className="terminal-btn green" />
-                <span className="ml-3 text-xs text-text-muted font-mono">system — resource monitor</span>
+                <span className="ml-3 text-xs text-text-muted font-mono">leadership — achievements.log</span>
               </div>
               <div className="p-5 space-y-4">
-                {PROCESS_BAR.map((bar, i) => (
+                {LEADERSHIP.map((item, i) => (
                   <motion.div
-                    key={bar.label}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    key={item.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="space-y-1.5"
+                    className="flex items-start gap-3"
                   >
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs font-mono text-text-secondary">{bar.label}</span>
-                      <span className="text-xs font-mono text-accent-cyan">{bar.value}%</span>
-                    </div>
-                    <div className="skill-bar-track">
-                      <motion.div
-                        className="skill-bar-fill"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${bar.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: i * 0.1 + 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      />
+                    <span className="text-accent-cyan font-mono text-xs mt-0.5 flex-shrink-0">→</span>
+                    <div>
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="text-sm font-semibold text-text-primary">{item.title}</span>
+                        <span className="text-xs text-text-muted font-mono">{item.organization}</span>
+                        {item.period && <span className="text-[10px] text-text-muted font-mono">· {item.period}</span>}
+                      </div>
+                      <p className="text-xs text-text-secondary leading-relaxed mt-1">{item.description}</p>
                     </div>
                   </motion.div>
                 ))}
